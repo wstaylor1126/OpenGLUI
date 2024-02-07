@@ -80,17 +80,25 @@ int main()
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 		
-		*(float*)((char*)Quad1Vertices + sizeof(float)) = randSin;
-		*(float*)((char*)Quad1Vertices) = randSin;
-		glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), Quad1Vertices, GL_STATIC_DRAW);
+		//*(float*)((char*)Quad1Vertices + sizeof(float)) = randSin;
+		//*(float*)((char*)Quad1Vertices) = randSin;
+		//glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), Quad1Vertices, GL_STATIC_DRAW);
 
-		glDrawArrays(GL_QUADS, 0, 4);
+		//glDrawArrays(GL_QUADS, 0, 4);
 
-		glBegin(GL_TRIANGLES);
+		int x = 0;
+		int y = 0;
+		glfwGetWindowSize(window, &x, &y);
+		glViewport(0, 0, x, y);
+
+		glBegin(GL_QUADS);
+		
 		glColor3f(randSin, 0.4f, 0.5f);
-		glVertex2f(Quad1Vertices[0], Quad1Vertices[1]);
-		glVertex2f(Quad1Vertices[2], Quad1Vertices[3]);
-		glVertex2f(Quad1Vertices[4], Quad1Vertices[5]);
+
+		glVertex2f(-0.5f - randSin, -0.5f);
+		glVertex2f(0.5f - randSin, -0.5f);
+		glVertex2f(0.5f - randSin, 0.5f);
+		glVertex2f(-0.5f - randSin, 0.5f);
 		glEnd();
 
 
