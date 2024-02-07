@@ -80,11 +80,11 @@ int main()
 		
 		glClear(GL_COLOR_BUFFER_BIT);
 		
-		//*(float*)((char*)Quad1Vertices + sizeof(float)) = randSin;
-		//*(float*)((char*)Quad1Vertices) = randSin;
-		//glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), Quad1Vertices, GL_STATIC_DRAW);
+		*(float*)((char*)Quad1Vertices + sizeof(float)) = randSin;
+		*(float*)((char*)Quad1Vertices) = randSin;
+		glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), Quad1Vertices, GL_STATIC_DRAW);
 
-		//glDrawArrays(GL_QUADS, 0, 4);
+		glDrawArrays(GL_QUADS, 0, 4);
 
 		glBegin(GL_TRIANGLES);
 		glColor3f(randSin, 0.4f, 0.5f);
