@@ -1,17 +1,11 @@
 #include <windows.h>
 
-#define GLEW_STATIC
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include <iostream>
-
 #include "sLib.h"
 
-using namespace std;
+#include "UIEngine.h"
 
-BasicShaderFile randShader("C:\\Users\\Falcon\\OneDrive\\Desktop\\slib.txt");
+using namespace std;
 
 
 int main()
@@ -19,37 +13,20 @@ int main()
 	Log GLLog("C:\\Users\\Falcon\\OneDrive\\Desktop\\GLLog.txt", "GLLog");
 
 
+	UIEngine ui;
 
-	randShader.Load();
-
-	if (!glfwInit())
+	if (!ui.Init(1280, 720, "UIEngine"))
 	{
-
-		std::cout << "GLFW initialization failed." << std::endl;
-
+		std::cout << "Error initializing UIEngine" << std::endl;
 		return 0;
-	}
-
-	GLLog.Write("GLFW initialization successful.");
-	
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "GL_4.6", nullptr, nullptr);
-	glfwMakeContextCurrent(window);
-
-	GLenum errCode = glewInit();
-
-	if (errCode)
-	{
-		const char* glewErrStr = (char*)glewGetErrorString(errCode);
-		GLLog.Write(std::string(glewErrStr));
-		std::cout << "GLEW error: " << glewErrStr << std::endl;
-	}
+	};
 
 
-	glfwSwapInterval(1);
-	
-	float random = 0.0f;
+	GLLog.Write("UIEngine successfully initialized");
 
-//--Quad 1
+
+	glfwSwapInterval(0);
+
 
 	float Quad1Vertices[8] =
 	{
@@ -67,14 +44,16 @@ int main()
 
 	while (1)
 	{
-
-		random += 0.025f;
-		float randSin = sin(random);
-
-
-		if (glfwWindowShouldClose(window))
+		if (uiengine::cursorIsHeld == 1)
 		{
-			glfwDestroyWindow(window);
+			ui.vertexW = uiengine::PixelToVertex(ui.cursorPosX, 1280)-0.5f;
+			ui.vertexH = -uiengine::PixelToVertex(ui.cursorPosY, 720)-0.5f;
+		}
+
+
+		if (glfwWindowShouldClose(ui.window))
+		{
+			glfwDestroyWindow(ui.window);
 			break;
 		}
 		
@@ -88,28 +67,29 @@ int main()
 
 		int x = 0;
 		int y = 0;
-		glfwGetWindowSize(window, &x, &y);
+		glfwGetWindowSize(ui.window, &x, &y);
 		glViewport(0, 0, x, y);
 
 		glBegin(GL_QUADS);
 		
-		glColor3f(randSin, 0.4f, 0.5f);
+		glColor3f(0.5f, 0.4f, 0.5f);
 
-		glVertex2f(-0.5f - randSin, -0.5f);
-		glVertex2f(0.5f - randSin, -0.5f);
-		glVertex2f(0.5f - randSin, 0.5f);
-		glVertex2f(-0.5f - randSin, 0.5f);
+		//std::cout << ui.vertexW << ui.vertexH << std::endl;
+
+		glVertex2f(ui.vertexW, ui.vertexH);
+		glVertex2f(0.5f+ui.vertexW+0.5f, -0.5f+ ui.vertexH + 0.5f);
+		glVertex2f(0.5f+ ui.vertexW + 0.5f, 0.5f+ ui.vertexH + 0.5f);
+		glVertex2f(-0.5f+ui.vertexW + 0.5f, 0.5f+ ui.vertexH + 0.5f);
 		glEnd();
 
 
 		
-
-		glfwSwapBuffers(window);
+		
+		glfwSwapBuffers(ui.window);
 		glfwPollEvents();
 	}
 
-	glfwTerminate();
-
+	ui.~UIEngine();
 	GLLog.Dump();
 	return 0;
 }

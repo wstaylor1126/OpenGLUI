@@ -2,27 +2,36 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\slib\BasicShaderFile.cpp">
-      <Filter>slib</Filter>
-    </ClCompile>
     <ClCompile Include="src\slib\Log.cpp">
       <Filter>slib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\BasicShaderFile.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UIEngine.cpp">
+      <Filter>engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="slib">
       <UniqueIdentifier>{746dbbf6-3637-43c7-8370-c3abc40de7b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine">
+      <UniqueIdentifier>{18e1b4df-500f-4fca-9a37-fbd3eb29a0b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\slib\BasicShaderFile.h">
-      <Filter>slib</Filter>
-    </ClInclude>
     <ClInclude Include="src\slib\Log.h">
       <Filter>slib</Filter>
     </ClInclude>
     <ClInclude Include="src\slib\sLib.h">
       <Filter>slib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\UIEngine.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\BasicShaderFile.h">
+      <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

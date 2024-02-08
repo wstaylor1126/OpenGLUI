@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="UIEngine.cpp" />
+    <ClCompile Include="src\engine\BasicShaderFile.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\slib\BasicShaderFile.cpp" />
     <ClCompile Include="src\slib\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\slib\BasicShaderFile.h" />
+    <ClInclude Include="src\engine\BasicShaderFile.h" />
+    <ClInclude Include="src\engine\UIEngine.h" />
     <ClInclude Include="src\slib\Log.h" />
     <ClInclude Include="src\slib\sLib.h" />
   </ItemGroup>
@@ -126,7 +128,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\OpenGLUI\glfw\include\;$(SolutionDir)\OpenGLUI\glew\;$(SolutionDir)\OpenGLUI\src\slib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\OpenGLUI\glfw\include\;$(SolutionDir)\OpenGLUI\glew\;$(SolutionDir)\OpenGLUI\src\slib;$(SolutionDir)\OpenGLUI\src\engine</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +146,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\OpenGLUI\glfw\include\;$(SolutionDir)\OpenGLUI\glew\;$(SolutionDir)\OpenGLUI\src\slib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\OpenGLUI\glfw\include\;$(SolutionDir)\OpenGLUI\glew\;$(SolutionDir)\OpenGLUI\src\slib;$(SolutionDir)\OpenGLUI\src\engine</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
