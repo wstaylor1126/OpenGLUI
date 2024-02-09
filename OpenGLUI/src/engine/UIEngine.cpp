@@ -13,9 +13,9 @@ void UIEngine::glfwKeyCallback(GLFWwindow* window, int keyCode, int scanCode, in
 	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
 
 	
-	if (keyCode == GLFW_KEY_0 && action == GLFW_PRESS)
+	if (keyCode >= 48 && keyCode <=57 && action == GLFW_PRESS)
 	{
-
+		uiengine::vertexId = keyCode - 48;
 	}
 }
 void UIEngine::glfwCursorPositionCallback(GLFWwindow* window, double xPos, double yPos)
@@ -67,7 +67,7 @@ int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* mon
 	window = glfwCreateWindow(windowX, windowY, title, monitor, nullptr);
 	glfwMakeContextCurrent(window);
 
-	BindWindowToEngineClass();
+	BindWindowToEngineContext();
 
 	GLenum errCode = glewInit();
 
@@ -93,7 +93,7 @@ void UIEngine::SetGLFWCallbacks()
 	glfwSetMouseButtonCallback(window, (GLFWmousebuttonfun)glfwMouseButtonCallback);
 
 }
-void UIEngine::BindWindowToEngineClass()
+void UIEngine::BindWindowToEngineContext()
 {
 	glfwSetWindowUserPointer(window, this);
 }

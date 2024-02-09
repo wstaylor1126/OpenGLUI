@@ -20,6 +20,14 @@
 namespace uiengine
 {
 	inline int cursorIsHeld = 0;
+	inline int vertexId = 1;
+	inline float verticies[8] =
+	{
+		-0.5f, -0.5f,
+		0.5f, -0.5f,
+		0.5f, 0.5f,
+		-0.5f, 0.5f
+	};
 
 	inline float PixelToVertex(int pixel, int screenDimention)
 	{
@@ -31,10 +39,8 @@ namespace uiengine
 class UIEngine
 {
 public:
-	float vertexW =  0.0f;
-	float vertexH =  0.0f;
-	int cursorPosX = 1;
-	int cursorPosY = 1;
+	int cursorPosX = 0;
+	int cursorPosY = 0;
 
 	GLFWwindow* window;
 	int Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor=nullptr);
@@ -49,6 +55,6 @@ private:
 	static void glfwCursorPositionCallback(GLFWwindow* window, double xPos, double yPos);
 	static void glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int action, int mods);
 
-	void BindWindowToEngineClass();
+	void BindWindowToEngineContext();
 };
 

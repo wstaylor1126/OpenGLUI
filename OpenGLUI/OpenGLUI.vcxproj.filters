@@ -8,7 +8,7 @@
     <ClCompile Include="src\engine\BasicShaderFile.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="UIEngine.cpp">
+    <ClCompile Include="src\engine\UIEngine.cpp">
       <Filter>engine</Filter>
     </ClCompile>
   </ItemGroup>

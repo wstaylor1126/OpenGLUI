@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UIEngine.cpp" />
     <ClCompile Include="src\engine\BasicShaderFile.cpp" />
+    <ClCompile Include="src\engine\UIEngine.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\slib\Log.cpp" />
   </ItemGroup>

@@ -46,8 +46,8 @@ int main()
 	{
 		if (uiengine::cursorIsHeld == 1)
 		{
-			ui.vertexW = uiengine::PixelToVertex(ui.cursorPosX, 1280)-0.5f;
-			ui.vertexH = -uiengine::PixelToVertex(ui.cursorPosY, 720)-0.5f;
+			uiengine::verticies[uiengine::vertexId*2-2] = uiengine::PixelToVertex(ui.cursorPosX, 1280);
+			uiengine::verticies[uiengine::vertexId*2-1] = -uiengine::PixelToVertex(ui.cursorPosY, 720);
 		}
 
 
@@ -76,10 +76,10 @@ int main()
 
 		//std::cout << ui.vertexW << ui.vertexH << std::endl;
 
-		glVertex2f(ui.vertexW, ui.vertexH);
-		glVertex2f(0.5f+ui.vertexW+0.5f, -0.5f+ ui.vertexH + 0.5f);
-		glVertex2f(0.5f+ ui.vertexW + 0.5f, 0.5f+ ui.vertexH + 0.5f);
-		glVertex2f(-0.5f+ui.vertexW + 0.5f, 0.5f+ ui.vertexH + 0.5f);
+		glVertex2f(uiengine::verticies[0], uiengine::verticies[1]);
+		glVertex2f(uiengine::verticies[2], uiengine::verticies[3]);
+		glVertex2f(uiengine::verticies[4], uiengine::verticies[5]);
+		glVertex2f(uiengine::verticies[6], uiengine::verticies[7]);
 		glEnd();
 
 
