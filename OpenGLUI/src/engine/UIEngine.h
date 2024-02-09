@@ -14,7 +14,7 @@
 #define _MAX_BASIC_SHADER_SIZE_ 8192
 
 #include "sLib.h"
-#include "BasicShaderFile.h"
+#include "Shader.h"
 
 
 namespace uiengine
@@ -54,6 +54,7 @@ private:
 	static void glfwKeyCallback(GLFWwindow* window, int keyCode, int scanCode, int action, int mods);
 	static void glfwCursorPositionCallback(GLFWwindow* window, double xPos, double yPos);
 	static void glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int action, int mods);
+	static void glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height);
 
 	void BindWindowToEngineContext();
 };

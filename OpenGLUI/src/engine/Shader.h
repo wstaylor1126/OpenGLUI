@@ -5,6 +5,12 @@
 
 #include "UIEngine.h"
 
+namespace shader
+{
+	unsigned int NewShader(std::string& vShader, std::string& fShader);
+	unsigned int CompileShader(unsigned int shaderType, std::string& shaderSource);
+}
+
 class BasicShaderFile
 {
 public:

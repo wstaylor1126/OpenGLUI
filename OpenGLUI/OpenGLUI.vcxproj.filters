@@ -5,7 +5,7 @@
     <ClCompile Include="src\slib\Log.cpp">
       <Filter>slib</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\BasicShaderFile.cpp">
+    <ClCompile Include="src\engine\Shader.cpp">
       <Filter>engine</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\UIEngine.cpp">
@@ -30,7 +30,7 @@
     <ClInclude Include="src\engine\UIEngine.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\BasicShaderFile.h">
+    <ClInclude Include="src\engine\Shader.h">
       <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>

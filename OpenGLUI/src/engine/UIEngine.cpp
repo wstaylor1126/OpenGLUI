@@ -4,9 +4,7 @@
 //--Callbacks
 void UIEngine::glfwErrorCallback(int errCode, const char* description)
 {
-#ifndef _SUI_NO_DEBUG_
 	std::cout << "GLFW error: " << errCode << ": " << description << std::endl;
-#endif
 }
 void UIEngine::glfwKeyCallback(GLFWwindow* window, int keyCode, int scanCode, int action, int mods)
 {
@@ -39,9 +37,11 @@ void UIEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int a
 	{
 		uiengine::cursorIsHeld = 0;
 	}
-	
 }
-
+void UIEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
 
 //--Public
 UIEngine::UIEngine()
@@ -58,9 +58,7 @@ int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* mon
 	
 	if (!glfwInit())
 	{
-#ifndef _SUI_NO_DEBUG_
 		std::cout << "GLFW initialization failed." << std::endl;
-#endif
 		return 0;
 	}
 
@@ -73,10 +71,8 @@ int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* mon
 
 	if (errCode)
 	{
-#ifndef _SUI_NO_DEBUG_
 		const char* glewErrStr = (char*)glewGetErrorString(errCode);
 		std::cout << "GLEW error: " << glewErrStr << std::endl;
-#endif
 		return 0;
 	}
 
@@ -91,7 +87,7 @@ void UIEngine::SetGLFWCallbacks()
 	glfwSetKeyCallback(window, (GLFWkeyfun)glfwKeyCallback);
 	glfwSetCursorPosCallback(window, (GLFWcursorposfun)glfwCursorPositionCallback);
 	glfwSetMouseButtonCallback(window, (GLFWmousebuttonfun)glfwMouseButtonCallback);
-
+	glfwSetFramebufferSizeCallback(window, (GLFWframebuffersizefun)glfwFrameBufferSizeCallback);
 }
 void UIEngine::BindWindowToEngineContext()
 {
