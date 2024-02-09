@@ -1,12 +1,15 @@
 #include "Shader.h"
 
+//--Public
 
-
-unsigned int shader::NewShader(std::string& vShader, std::string& fShader)
+void BasicShaderProgram::CreateShaderProgram()
 {
+	LoadFromDisk(vertexShaderStr, vertexShaderPath);
+	LoadFromDisk(fragmentShaderStr, fragmentShaderPath);
+
 	unsigned int programId = glCreateProgram();
-	unsigned int vertexShaderId = CompileShader(GL_VERTEX_SHADER, vShader);
-	unsigned int fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fShader);
+	unsigned int vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderStr);
+	unsigned int fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderStr);
 
 	glAttachShader(programId, vertexShaderId);
 	glAttachShader(programId, fragmentShaderId);
@@ -17,10 +20,18 @@ unsigned int shader::NewShader(std::string& vShader, std::string& fShader)
 
 	glDeleteShader(vertexShaderId);
 	glDeleteShader(fragmentShaderId);
-	return programId;
-}
+	
 
-unsigned int shader::CompileShader(unsigned int shaderType, std::string& shaderSource)
+	shaderProgramId = programId;
+}
+BasicShaderProgram::BasicShaderProgram(const char* vertexFilePath, const char* fragmentFilePath)
+{
+	vertexShaderPath = vertexFilePath;
+	fragmentShaderPath = fragmentFilePath;
+}
+//--Private
+
+unsigned int BasicShaderProgram::CompileShader(unsigned int shaderType, std::string& shaderSource)
 {
 	unsigned int shaderId = glCreateShader(shaderType);
 	const char* sourceCStr = shaderSource.c_str();
@@ -34,9 +45,10 @@ unsigned int shader::CompileShader(unsigned int shaderType, std::string& shaderS
 		int strLen;
 		glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &strLen);
 		char* msg = new char[strLen];
+
 		std::memset(msg, '\x00', strLen);
 		glGetShaderInfoLog(shaderId, strLen, &strLen, msg);
-		
+
 		std::cout << "(" << std::hex << shaderType << std::dec << ")" << "Failed to compile shader:\n" << msg << std::endl;
 
 		delete[] msg;
@@ -44,12 +56,13 @@ unsigned int shader::CompileShader(unsigned int shaderType, std::string& shaderS
 
 	return shaderId;
 }
-
-
-void BasicShaderFile::Load()
+void BasicShaderProgram::LoadFromDisk(std::string& shaderStr, const char* filePath)
 {
+	int sizeOnDisk;
+	char shaderBytes[_MAX_BASIC_SHADER_SIZE_];
+
 	std::memset(shaderBytes, '\x00', _MAX_BASIC_SHADER_SIZE_);
-	std::ifstream readStream(filePathI);
+	std::ifstream readStream(filePath);
 	readStream.seekg(0, readStream.end);
 	sizeOnDisk = readStream.tellg();
 
@@ -65,14 +78,7 @@ void BasicShaderFile::Load()
 	readStream.seekg(0, readStream.beg);
 
 	readStream.read(shaderBytes, sizeOnDisk);
-	return;
-}
-std::string BasicShaderFile::GetString()
-{
-	return std::string(shaderBytes, sizeOnDisk);
-}
-BasicShaderFile::BasicShaderFile(const char* filePath)
-{
 
-	filePathI = filePath;
+	shaderStr = std::string(shaderBytes, sizeOnDisk);
+	return;
 }

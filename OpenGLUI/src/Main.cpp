@@ -25,20 +25,17 @@ int main()
 
 	//GLLog.Write("UIEngine successfully initialized");
 
-	std::string shaderV = "Penis";
-	std::string shaderF = "Dick";
-	shader::NewShader(shaderV, shaderF);
+	BasicShaderProgram shaderProgram("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseVertex.vert", "C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseFrag.frag");
+	shaderProgram.CreateShaderProgram();
+
+	
+
+	glUseProgram(shaderProgram.shaderProgramId);
+	colorLocation = glGetUniformLocation(shaderProgram.shaderProgramId, "baseColor");
+
 
 	glfwSwapInterval(1);
 
-
-	float Quad1Vertices[8] =
-	{
-		-0.5f, -0.5f,
-		0.5f, -0.5f,
-		0.5f, 0.5f,
-		-0.5f, 0.5f
-	};
 
 	unsigned int vertexBufId;
 	glGenBuffers(1, &vertexBufId);
@@ -46,9 +43,10 @@ int main()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (const void*)0);
 
-
+	
 	while (1)
 	{
+
 		if (glfwWindowShouldClose(ui.window))
 		{
 			glfwDestroyWindow(ui.window);
@@ -61,23 +59,16 @@ int main()
 			uiengine::verticies[uiengine::vertexId * 2 - 1] = -uiengine::PixelToVertex(ui.cursorPosY, 720);
 		}
 
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), Quad1Vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), uiengine::verticies, GL_STATIC_DRAW);
+
+		
+
+		glUniform4f(colorLocation, sin(glfwGetTime()+0.5f)+1.5f, sin(glfwGetTime()+1.5f/2), sin(glfwGetTime()+1/3), 1.0f);
+
 		glDrawArrays(GL_QUADS, 0, 4);
-
-
-		//glBegin(GL_QUADS);
-		//
-		//glColor3f(0.5f, 0.4f, 0.5f);
-
-		////std::cout << ui.vertexW << ui.vertexH << std::endl;
-
-		//glVertex2f(uiengine::verticies[0], uiengine::verticies[1]);
-		//glVertex2f(uiengine::verticies[2], uiengine::verticies[3]);
-		//glVertex2f(uiengine::verticies[4], uiengine::verticies[5]);
-		//glVertex2f(uiengine::verticies[6], uiengine::verticies[7]);
-		//glEnd();
 
 		glfwSwapBuffers(ui.window);
 		glfwPollEvents();

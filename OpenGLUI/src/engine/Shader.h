@@ -5,20 +5,26 @@
 
 #include "UIEngine.h"
 
+inline unsigned int colorLocation;
+
 namespace shader
 {
-	unsigned int NewShader(std::string& vShader, std::string& fShader);
-	unsigned int CompileShader(unsigned int shaderType, std::string& shaderSource);
 }
 
-class BasicShaderFile
+class BasicShaderProgram
 {
 public:
-	void Load();
+
 	std::string GetString();
-	BasicShaderFile(const char* filePath);
+	BasicShaderProgram(const char* vertexFilePath, const char* fragmentFilePath);
+	void CreateShaderProgram();
+	unsigned int shaderProgramId;
 private:
-	const char* filePathI;
-	char shaderBytes[_MAX_BASIC_SHADER_SIZE_]; //--Yeah it's gonna be on the stack. Hopefully gets passed to rendering api fast
-	int sizeOnDisk;
+	const char* vertexShaderPath;
+	const char* fragmentShaderPath;
+	std::string vertexShaderStr;
+	std::string fragmentShaderStr;
+
+	unsigned int CompileShader(unsigned int shaderType, std::string& shaderSource);
+	void LoadFromDisk(std::string& shaderString, const char* filePath);
 };
