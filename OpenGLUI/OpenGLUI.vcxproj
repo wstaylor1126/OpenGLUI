@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\engine\Shader.cpp" />
+    <ClCompile Include="src\engine\Renderer.cpp" />
     <ClCompile Include="src\engine\UIEngine.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\slib\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\Renderer.h" />
     <ClInclude Include="src\engine\Shader.h" />
     <ClInclude Include="src\engine\UIEngine.h" />
     <ClInclude Include="src\slib\Log.h" />

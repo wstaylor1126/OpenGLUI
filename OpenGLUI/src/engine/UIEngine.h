@@ -15,19 +15,12 @@
 
 #include "sLib.h"
 #include "Shader.h"
-
+#include "Renderer.h"
 
 namespace uiengine
 {
 	inline int cursorIsHeld = 0;
 	inline int vertexId = 1;
-	inline float verticies[8] =
-	{
-		-0.5f, -0.5f,
-		0.5f, -0.5f,
-		0.5f, 0.5f,
-		-0.5f, 0.5f
-	};
 
 	inline float PixelToVertex(int pixel, int screenDimention)
 	{
@@ -39,8 +32,10 @@ namespace uiengine
 class UIEngine
 {
 public:
-	int cursorPosX = 0;
-	int cursorPosY = 0;
+	int _cursorPosX_;
+	int _cursorPosY_;
+	int _windowX_;
+	int _windowY_;
 
 	GLFWwindow* window;
 	int Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor=nullptr);
@@ -55,6 +50,7 @@ private:
 	static void glfwCursorPositionCallback(GLFWwindow* window, double xPos, double yPos);
 	static void glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int action, int mods);
 	static void glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height);
+	static void glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos);
 
 	void BindWindowToEngineContext();
 };

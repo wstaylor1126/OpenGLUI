@@ -11,6 +11,9 @@
     <ClCompile Include="src\engine\UIEngine.cpp">
       <Filter>engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\Renderer.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="slib">
@@ -31,6 +34,9 @@
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Shader.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Renderer.h">
       <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>

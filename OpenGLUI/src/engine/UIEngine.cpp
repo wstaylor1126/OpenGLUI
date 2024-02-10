@@ -21,8 +21,8 @@ void UIEngine::glfwCursorPositionCallback(GLFWwindow* window, double xPos, doubl
 	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
 	if (xPos != 0 && yPos != 0)
 	{
-		engine->cursorPosX = xPos;
-		engine->cursorPosY = yPos;
+		engine->_cursorPosX_ = xPos;
+		engine->_cursorPosY_ = yPos;
 	}
 }
 void UIEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int action, int mods)
@@ -40,7 +40,16 @@ void UIEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int a
 }
 void UIEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
+	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	Draw(engine->window);
+	engine->_windowX_ = width;
+	engine->_windowY_ = height;
 	glViewport(0, 0, width, height);
+}
+void UIEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
+{
+	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	Draw(engine->window);
 }
 
 //--Public
@@ -55,7 +64,6 @@ UIEngine::~UIEngine()
 }
 int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor)
 {
-	
 	if (!glfwInit())
 	{
 		std::cout << "GLFW initialization failed." << std::endl;
@@ -66,6 +74,9 @@ int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* mon
 	glfwMakeContextCurrent(window);
 
 	BindWindowToEngineContext();
+
+	_windowX_ = windowX;
+	_windowY_ = windowY;
 
 	GLenum errCode = glewInit();
 
@@ -88,6 +99,7 @@ void UIEngine::SetGLFWCallbacks()
 	glfwSetCursorPosCallback(window, (GLFWcursorposfun)glfwCursorPositionCallback);
 	glfwSetMouseButtonCallback(window, (GLFWmousebuttonfun)glfwMouseButtonCallback);
 	glfwSetFramebufferSizeCallback(window, (GLFWframebuffersizefun)glfwFrameBufferSizeCallback);
+	glfwSetWindowPosCallback(window, (GLFWwindowposfun)glfwWindowPosCallback);
 }
 void UIEngine::BindWindowToEngineContext()
 {

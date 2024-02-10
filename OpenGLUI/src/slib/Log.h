@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+
 class Log
 {
 public:
@@ -14,7 +15,7 @@ public:
 	void Dump();
 	void Read();
 	Log(const char* path, const char* nameOpt="Log");
-
+	~Log() = default;
 private:
 	std::vector<std::string> log;
 	const char* exportPath;

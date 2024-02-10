@@ -2,36 +2,47 @@
 
 //--Public
 
-void BasicShaderProgram::CreateShaderProgram()
+BasicShaderProgram::BasicShaderProgram()
 {
-	LoadFromDisk(vertexShaderStr, vertexShaderPath);
-	LoadFromDisk(fragmentShaderStr, fragmentShaderPath);
-
-	unsigned int programId = glCreateProgram();
-	unsigned int vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderStr);
-	unsigned int fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderStr);
-
-	glAttachShader(programId, vertexShaderId);
-	glAttachShader(programId, fragmentShaderId);
-	glLinkProgram(programId);
-	glValidateProgram(programId);
-
-	//--Cleanup
-
-	glDeleteShader(vertexShaderId);
-	glDeleteShader(fragmentShaderId);
-	
-
-	shaderProgramId = programId;
+	shaderProgramObjId = glCreateProgram();
 }
-BasicShaderProgram::BasicShaderProgram(const char* vertexFilePath, const char* fragmentFilePath)
+void BasicShaderProgram::UseProgram()
 {
-	vertexShaderPath = vertexFilePath;
-	fragmentShaderPath = fragmentFilePath;
+	glLinkProgram(shaderProgramObjId);
+	glValidateProgram(shaderProgramObjId);
+	//--Probably some error handling to do. I mean there's a lot to do everywhere but it'll be later
+
+	glUseProgram(shaderProgramObjId);
+}
+void BasicShaderProgram::AttachShader(Shader& shader)
+{
+	glAttachShader(shaderProgramObjId, shader.shaderId);
+}
+void BasicShaderProgram::CreateAndAttachShader(const char* sPath, unsigned int sType)
+{
+	Shader newShader(sPath, sType);
+	newShader.Init();
+	AttachShader(newShader);
+
+	newShader.~Shader();
+}
+
+
+//--Public
+
+void Shader::Init()
+{
+	LoadFromDisk(shaderStr, shaderPath);
+	shaderId = CompileShader(shaderStr);
+}
+Shader::Shader(const char* filePath, unsigned int type)
+{
+	shaderPath = filePath;
+	shaderType = type;
 }
 //--Private
 
-unsigned int BasicShaderProgram::CompileShader(unsigned int shaderType, std::string& shaderSource)
+unsigned int Shader::CompileShader(std::string& shaderSource)
 {
 	unsigned int shaderId = glCreateShader(shaderType);
 	const char* sourceCStr = shaderSource.c_str();
@@ -56,7 +67,7 @@ unsigned int BasicShaderProgram::CompileShader(unsigned int shaderType, std::str
 
 	return shaderId;
 }
-void BasicShaderProgram::LoadFromDisk(std::string& shaderStr, const char* filePath)
+void Shader::LoadFromDisk(std::string& shaderStr, const char* filePath)
 {
 	int sizeOnDisk;
 	char shaderBytes[_MAX_BASIC_SHADER_SIZE_];
@@ -81,4 +92,8 @@ void BasicShaderProgram::LoadFromDisk(std::string& shaderStr, const char* filePa
 
 	shaderStr = std::string(shaderBytes, sizeOnDisk);
 	return;
+}
+Shader::~Shader()
+{
+	glDeleteShader(shaderId);
 }
