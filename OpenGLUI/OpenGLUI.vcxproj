@@ -19,16 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\BMPTextures.cpp" />
+    <ClCompile Include="src\engine\SGFXTypes.cpp" />
     <ClCompile Include="src\engine\Shader.cpp" />
     <ClCompile Include="src\engine\Renderer.cpp" />
-    <ClCompile Include="src\engine\UIEngine.cpp" />
+    <ClCompile Include="src\engine\SGFXEngine.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\slib\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\BMPTextures.h" />
     <ClInclude Include="src\engine\Renderer.h" />
+    <ClInclude Include="src\engine\SGFXTypes.h" />
     <ClInclude Include="src\engine\Shader.h" />
-    <ClInclude Include="src\engine\UIEngine.h" />
+    <ClInclude Include="src\engine\SGFXEngine.h" />
     <ClInclude Include="src\slib\Log.h" />
     <ClInclude Include="src\slib\sLib.h" />
   </ItemGroup>

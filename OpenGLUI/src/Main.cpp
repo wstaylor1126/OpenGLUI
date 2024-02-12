@@ -3,69 +3,63 @@
 #include <iostream>
 
 #include "sLib.h"
-#include "UIEngine.h"
+#include "SGFXEngine.h"
 
 using namespace std;
+using namespace sgfxengine;
+using namespace sgfxtypes;
+using namespace shader;
 
 
 int main()
 {
+	
 	//Log GLLog("C:\\Users\\Falcon\\OneDrive\\Desktop\\GLLog.txt", "GLLog");
 
-
-	UIEngine ui;
+	SGFXEngine ui;
 
 	if (!ui.Init(1280, 720, "UIEngine"))
 	{
 		std::cout << "Error initializing UIEngine" << std::endl;
 		return 0;
 	};
-
+	
 
 	//GLLog.Write("UIEngine successfully initialized");
 
 	BasicShaderProgram shaderProgram;
-	shaderProgram.CreateAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseVertex.vert", GL_VERTEX_SHADER);
-	shaderProgram.CreateAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseFrag.frag", GL_FRAGMENT_SHADER);
+	shaderProgram.CompileAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseVertex.vert", GL_VERTEX_SHADER);
+	shaderProgram.CompileAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseFrag.frag", GL_FRAGMENT_SHADER);
 	shaderProgram.UseProgram();
 
 
-	colorLocation = glGetUniformLocation(shaderProgram.shaderProgramObjId, "color");
+	textureLocation = glGetUniformLocation(shaderProgram.shaderProgramObjId, "unif_Texture");
 
 
 	glfwSwapInterval(0);
 
 
-	unsigned int vertexBufId;
-	glGenBuffers(1, &vertexBufId);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBufId);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (const void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (const void*)8);
-	
-
-	unsigned int indexBufId;
-	glGenBuffers(1, &indexBufId);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufId);
+	unsigned int vertexAttribArrayId;
+	glGenVertexArrays(1, &vertexAttribArrayId);
+	glBindVertexArray(vertexAttribArrayId);
 	
 
 	while (!glfwWindowShouldClose(ui.window))
 	{
-		if (uiengine::cursorIsHeld == 1)
-		{
-			renderer::verticies[uiengine::vertexId * 6 - 6] = uiengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
-			renderer::verticies[uiengine::vertexId * 6 - 5] = -uiengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
-			renderer::verticies[24] = uiengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
-			renderer::verticies[25] = -uiengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
-		}
+		//if (sgfxengine::cursorIsHeld == 1)
+		//{
+		//	renderer::vertexPositions[sgfxengine::vertexId * 4 - 4] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
+		//	renderer::vertexPositions[sgfxengine::vertexId * 4 - 3] = -sgfxengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
+		//	renderer::vertexPositions[16] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
+		//	renderer::vertexPositions[17] = -sgfxengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
+		//}
 
 		Draw(ui.window);
 
 		glfwPollEvents();
 	}
 
-	ui.~UIEngine();
+	ui.~SGFXEngine();
 	//GLLog.Dump();
 	return 0;
 }

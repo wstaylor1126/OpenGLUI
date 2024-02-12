@@ -18,7 +18,7 @@ void BasicShaderProgram::AttachShader(Shader& shader)
 {
 	glAttachShader(shaderProgramObjId, shader.shaderId);
 }
-void BasicShaderProgram::CreateAndAttachShader(const char* sPath, unsigned int sType)
+void BasicShaderProgram::CompileAndAttachShader(const char* sPath, unsigned int sType)
 {
 	Shader newShader(sPath, sType);
 	newShader.Init();
@@ -26,7 +26,6 @@ void BasicShaderProgram::CreateAndAttachShader(const char* sPath, unsigned int s
 
 	newShader.~Shader();
 }
-
 
 //--Public
 
@@ -59,7 +58,7 @@ unsigned int Shader::CompileShader(std::string& shaderSource)
 
 		std::memset(msg, '\x00', strLen);
 		glGetShaderInfoLog(shaderId, strLen, &strLen, msg);
-
+		
 		std::cout << "(" << std::hex << shaderType << std::dec << ")" << "Failed to compile shader:\n" << msg << std::endl;
 
 		delete[] msg;

@@ -8,10 +8,16 @@
     <ClCompile Include="src\engine\Shader.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\UIEngine.cpp">
+    <ClCompile Include="src\engine\SGFXEngine.cpp">
       <Filter>engine</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\Renderer.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\SGFXTypes.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\BMPTextures.cpp">
       <Filter>engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,13 +36,19 @@
     <ClInclude Include="src\slib\sLib.h">
       <Filter>slib</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\UIEngine.h">
+    <ClInclude Include="src\engine\SGFXEngine.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Shader.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Renderer.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\SGFXTypes.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\BMPTextures.h">
       <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>

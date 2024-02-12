@@ -1,35 +1,33 @@
 #pragma once
 #define GLEW_STATIC
+
+#define _GL_MAJOR_VERSION_ 3
+#define _GL_MINOR_VERSION_ 3
+
 //#define _SUI_NO_DEBUG_
 
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-
 #ifndef _SUI_NO_DEBUG_
+#define _SHOW_GL_CONTEXT_INFO_
 #define _BASIC_SHADER_DEBUG_
 #endif
 
 #define _MAX_BASIC_SHADER_SIZE_ 8192
 
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cmath>
+
 #include "sLib.h"
+#include "SGFXTypes.h"
 #include "Shader.h"
 #include "Renderer.h"
+#include "BMPTextures.h"
 
-namespace uiengine
-{
-	inline int cursorIsHeld = 0;
-	inline int vertexId = 1;
-
-	inline float PixelToVertex(int pixel, int screenDimention)
-	{
-
-		return ((float)pixel / screenDimention*2)-1.0f;
-	}
-}
-
-class UIEngine
+class SGFXEngine
 {
 public:
 	int _cursorPosX_;
@@ -39,8 +37,8 @@ public:
 
 	GLFWwindow* window;
 	int Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor=nullptr);
-	UIEngine();
-	~UIEngine();
+	SGFXEngine();
+	~SGFXEngine();
 	int x = 0;
 private:
 	void SetGLFWCallbacks();
@@ -54,4 +52,16 @@ private:
 
 	void BindWindowToEngineContext();
 };
+
+namespace sgfxengine
+{
+	inline int cursorIsHeld = 0;
+	inline int vertexId = 1;
+
+	inline float PixelToVertex(int pixel, int screenDimention)
+	{
+
+		return ((float)pixel / screenDimention * 2) - 1.0f;
+	}
+}
 

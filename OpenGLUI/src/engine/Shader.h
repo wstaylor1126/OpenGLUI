@@ -1,15 +1,6 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <fstream>
 
-#include "UIEngine.h"
-
-inline unsigned int colorLocation;
-
-namespace shader
-{
-}
+#include "SGFXEngine.h"
 
 class Shader
 {
@@ -35,11 +26,14 @@ public:
 	BasicShaderProgram();
 	~BasicShaderProgram() = default;
 	void AttachShader(Shader& shader);
-	void CreateAndAttachShader(const char* sPath, unsigned int sType);
+	void CompileAndAttachShader(const char* sPath, unsigned int sType);
 	void UseProgram();
 
 	unsigned int shaderProgramObjId;
 private:
 };
 
+namespace shader
+{
+}
 

@@ -1,68 +1,68 @@
-#include "UIEngine.h"
+#include "SGFXEngine.h"
 
 
 //--Callbacks
-void UIEngine::glfwErrorCallback(int errCode, const char* description)
+void SGFXEngine::glfwErrorCallback(int errCode, const char* description)
 {
 	std::cout << "GLFW error: " << errCode << ": " << description << std::endl;
 }
-void UIEngine::glfwKeyCallback(GLFWwindow* window, int keyCode, int scanCode, int action, int mods)
+void SGFXEngine::glfwKeyCallback(GLFWwindow* window, int keyCode, int scanCode, int action, int mods)
 {
-	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
 
 	
 	if (keyCode >= 48 && keyCode <=57 && action == GLFW_PRESS)
 	{
-		uiengine::vertexId = keyCode - 48;
+		sgfxengine::vertexId = keyCode - 48;
 	}
 }
-void UIEngine::glfwCursorPositionCallback(GLFWwindow* window, double xPos, double yPos)
+void SGFXEngine::glfwCursorPositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
-	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
 	if (xPos != 0 && yPos != 0)
 	{
 		engine->_cursorPosX_ = xPos;
 		engine->_cursorPosY_ = yPos;
 	}
 }
-void UIEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int action, int mods)
+void SGFXEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int action, int mods)
 {
-	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
 
 	if (buttonCode == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
-		uiengine::cursorIsHeld = 1;
+		sgfxengine::cursorIsHeld = 1;
 	}
 	else if (buttonCode == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
 	{
-		uiengine::cursorIsHeld = 0;
+		sgfxengine::cursorIsHeld = 0;
 	}
 }
-void UIEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
+void SGFXEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
-	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
 	Draw(engine->window);
 	engine->_windowX_ = width;
 	engine->_windowY_ = height;
 	glViewport(0, 0, width, height);
 }
-void UIEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
+void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 {
-	UIEngine* engine = (UIEngine*)glfwGetWindowUserPointer(window);
+	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
 	Draw(engine->window);
 }
 
 //--Public
-UIEngine::UIEngine()
+SGFXEngine::SGFXEngine()
 {
 
 }
-UIEngine::~UIEngine()
+SGFXEngine::~SGFXEngine()
 {
 
 	glfwTerminate();
 }
-int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor)
+int SGFXEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor)
 {
 	if (!glfwInit())
 	{
@@ -70,8 +70,18 @@ int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* mon
 		return 0;
 	}
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, _GL_MAJOR_VERSION_);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, _GL_MINOR_VERSION_);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	
+
 	window = glfwCreateWindow(windowX, windowY, title, monitor, nullptr);
 	glfwMakeContextCurrent(window);
+
+#ifdef _SHOW_GL_CONTEXT_INFO_
+	std::cout << glGetString(GL_VERSION) << std::endl;
+	std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+#endif
 
 	BindWindowToEngineContext();
 
@@ -92,7 +102,7 @@ int UIEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* mon
 	return 1;
 }
 //--Private
-void UIEngine::SetGLFWCallbacks()
+void SGFXEngine::SetGLFWCallbacks()
 {
 	glfwSetErrorCallback((GLFWerrorfun)glfwErrorCallback);
 	glfwSetKeyCallback(window, (GLFWkeyfun)glfwKeyCallback);
@@ -101,7 +111,7 @@ void UIEngine::SetGLFWCallbacks()
 	glfwSetFramebufferSizeCallback(window, (GLFWframebuffersizefun)glfwFrameBufferSizeCallback);
 	glfwSetWindowPosCallback(window, (GLFWwindowposfun)glfwWindowPosCallback);
 }
-void UIEngine::BindWindowToEngineContext()
+void SGFXEngine::BindWindowToEngineContext()
 {
 	glfwSetWindowUserPointer(window, this);
 }
