@@ -41,14 +41,16 @@ void SGFXEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int
 void SGFXEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
-	Draw(engine->window);
 	engine->_windowX_ = width;
 	engine->_windowY_ = height;
 	glViewport(0, 0, width, height);
+
+	Draw(engine->window);
 }
 void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
+
 	Draw(engine->window);
 }
 
