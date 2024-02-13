@@ -1,17 +1,17 @@
 #include "BMPTextures.h"
 
-BMPTexture::BMPTexture(const char* path)
+BMPTextureData::BMPTextureData(const char* path)
 {
 	filePath = path;
 }
-BMPTexture::~BMPTexture()
+BMPTextureData::~BMPTextureData()
 {
 	delete[] pixelData;
 }
-void BMPTexture::Load()
+void BMPTextureData::Load()
 {
 
-	std::ifstream bmpStream(filePath);
+	std::ifstream bmpStream(filePath, std::ifstream::binary);
 	bmpStream.seekg(0, bmpStream.end);
 	diskSize = bmpStream.tellg();
 	bmpStream.seekg(0, bmpStream.beg);
@@ -35,6 +35,27 @@ void BMPTexture::Load()
 	pixelData = new char[pixelDataSize];
 	std::memset(pixelData, '\x00', pixelDataSize);
 	bmpStream.seekg(bmpPixelDataStartAddress, bmpStream.beg);
-	bmpStream.read(pixelData, pixelDataSize);
+
+	int increment = 0;
+	while (bmpStream.good())
+	{
+
+		bmpStream.read(pixelData + increment, 4096);
+		increment += 4096;
+	}
+	
 	bmpStream.close();
+
+	//--Evil channel flip
+	for (unsigned long i = 0; i < pixelDataSize; i+=4)
+	{
+		unsigned long cpy = *(unsigned int*)(pixelData + i);
+		unsigned char blueChannel = *(unsigned char*)&cpy;
+		unsigned char redChannel = *((unsigned char*)(&cpy) + 2);
+
+		*(unsigned char*)&cpy = redChannel;
+		*((unsigned char*)(&cpy) + 2) = blueChannel;
+
+		*(unsigned int*)(pixelData + i) = cpy;
+	}
 }

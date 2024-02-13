@@ -22,10 +22,11 @@
 #include <cmath>
 
 #include "sLib.h"
-#include "SGFXTypes.h"
 #include "Shader.h"
 #include "Renderer.h"
 #include "BMPTextures.h"
+#include "VertexArray.h"
+
 
 class SGFXEngine
 {

@@ -14,10 +14,10 @@
     <ClCompile Include="src\engine\Renderer.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\SGFXTypes.cpp">
+    <ClCompile Include="src\engine\BMPTextures.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\BMPTextures.cpp">
+    <ClCompile Include="src\engine\VertexArray.cpp">
       <Filter>engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,10 +45,10 @@
     <ClInclude Include="src\engine\Renderer.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\SGFXTypes.h">
+    <ClInclude Include="src\engine\BMPTextures.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\BMPTextures.h">
+    <ClInclude Include="src\engine\VertexArray.h">
       <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>

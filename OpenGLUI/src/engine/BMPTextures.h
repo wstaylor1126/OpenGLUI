@@ -2,11 +2,11 @@
 #include "SGFXEngine.h"
 
 
-class BMPTexture
+class BMPTextureData
 {
 public:
-	BMPTexture(const char* path);
-	~BMPTexture();
+	BMPTextureData(const char* path);
+	~BMPTextureData();
 	void Load();
 
 	char* pixelData;

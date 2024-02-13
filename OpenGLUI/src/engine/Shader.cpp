@@ -52,6 +52,8 @@ unsigned int Shader::CompileShader(std::string& shaderSource)
 	glGetShaderiv(shaderId, GL_COMPILE_STATUS, &no_err);
 	if (!no_err)
 	{
+		std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+
 		int strLen;
 		glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &strLen);
 		char* msg = new char[strLen];
@@ -72,7 +74,7 @@ void Shader::LoadFromDisk(std::string& shaderStr, const char* filePath)
 	char shaderBytes[_MAX_BASIC_SHADER_SIZE_];
 
 	std::memset(shaderBytes, '\x00', _MAX_BASIC_SHADER_SIZE_);
-	std::ifstream readStream(filePath);
+	std::ifstream readStream(filePath, std::ifstream::binary);
 	readStream.seekg(0, readStream.end);
 	sizeOnDisk = readStream.tellg();
 

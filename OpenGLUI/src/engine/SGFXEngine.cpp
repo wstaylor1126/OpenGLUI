@@ -52,6 +52,7 @@ void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 	Draw(engine->window);
 }
 
+
 //--Public
 SGFXEngine::SGFXEngine()
 {
@@ -59,7 +60,6 @@ SGFXEngine::SGFXEngine()
 }
 SGFXEngine::~SGFXEngine()
 {
-
 	glfwTerminate();
 }
 int SGFXEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor)

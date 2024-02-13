@@ -45,3 +45,4 @@ Log::Log(const char* path, const char* nameOpt)
 	exportPath = path;
 	name = nameOpt;
 }
+Log::~Log() = default;

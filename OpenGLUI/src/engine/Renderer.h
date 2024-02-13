@@ -8,7 +8,25 @@ inline unsigned int textureLocation;
 
 namespace renderer
 {
-
+	inline unsigned int indexBuffer[6] =
+	{
+		0, 1, 3,
+		1, 2, 3,
+	};
+	inline float vertexPositions[16] =
+	{
+		-0.5f, -0.5f, 0.0f, 1.0f,
+		0.5f, -0.5f, 0.0f, 1.0f,
+		0.5f, 0.5f, 0.0f, 1.0f,
+		-0.5f, 0.5f, 0.0f, 1.0f,
+	};
+	inline float textureCoords[8] =
+	{
+		0.0f, 0.0f,
+		1.0f, 0.0f,
+		1.0f, 1.0f,
+		0.0f, 1.0f,
+	};
 	
 	//inline unsigned int indexBuffer[vertexCount] =
 	//{
@@ -33,19 +51,6 @@ namespace renderer
 	//	0.5f, 0.5f, 0.1f, 1.0f,
 	//	0.8f, 0.1f, 0.5f, 1.0f,
 	//};
-	inline unsigned int indexBuffer[6] =
-	{
-		0, 1, 3,
-		1, 2, 3,
-	};
-	inline float textureData[24] =
-	{
-		0.25f, 0.25f, 1.0f, 1.0f,
-		0.75f, 0.25f, 1.0f, 1.0f, 
-		0.75f, 0.75f, 1.0f, 1.0f, 
-		0.25f, 0.75f, 1.0f, 1.0f,
-	};
-
 }
 
 void Draw(GLFWwindow* window);
