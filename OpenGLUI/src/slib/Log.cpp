@@ -10,13 +10,13 @@ void Log::Dump()
 {
 	if (log.size() == 0)
 	{
-#ifdef _SLIB_LOG_DEBUG_ERR_
+#if defined(_SLIB_LOG_DEBUG_ERR_)
 		std::cout << name << " is empty, Dump() returned void." << std::endl;
 #endif
 		return;
 	}
 	std::ofstream logOut;
-	logOut.open(exportPath);
+	logOut.open(exportPath, std::ofstream::binary);
 	for (int i = 0; i < log.size(); i++)
 	{
 		std::string tmp = log[i];
@@ -29,7 +29,7 @@ void Log::Read()
 {
 	if (log.size() == 0)
 	{
-#ifdef _SLIB_LOG_DEBUG_ERR_
+#if  defined(_SLIB_LOG_DEBUG_ERR_)
 		std::cout << name << " is empty, Read() returned void." << std::endl;
 #endif
 		return;

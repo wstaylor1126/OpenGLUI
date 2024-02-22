@@ -1,5 +1,6 @@
 #include "BMPTextures.h"
 
+//--Public
 BMPTextureData::BMPTextureData(const char* path)
 {
 	filePath = path;
@@ -45,9 +46,12 @@ void BMPTextureData::Load()
 	}
 	
 	bmpStream.close();
-
-	//--Evil channel flip
-	for (unsigned long i = 0; i < pixelDataSize; i+=4)
+	BMPRedBlueChannelFlip();
+}
+//--Private
+void BMPTextureData::BMPRedBlueChannelFlip() //--This is absolutely evil
+{
+	for (unsigned long i = 0; i < pixelDataSize; i += 4)
 	{
 		unsigned long cpy = *(unsigned int*)(pixelData + i);
 		unsigned char blueChannel = *(unsigned char*)&cpy;

@@ -2,21 +2,23 @@
 
 #include "SGFXEngine.h"
 
-class Shader
+//--This shader loader is going to be expanded upon and improved. It's a little rushed and needs to be cleaned up
+//--It's a good foundation though
+
+class ShaderSource
 {
 public:
 
-	Shader(const char* filePath, unsigned int type);
-	~Shader();
+	ShaderSource(const char* filePath, unsigned int type);
+	~ShaderSource();
 	void Init();
-	unsigned int shaderId;
-	unsigned int shaderType;
+	unsigned int shaderObjId, shaderType;
 private:
-	const char* shaderPath;
+	const char* shaderFilePath;
 	std::string shaderStr;
 
-	unsigned int CompileShader(std::string& shaderSource);
-	void LoadFromDisk(std::string& shaderString, const char* filePath);
+	unsigned int CompileShader(const std::string& shaderSource);
+	void LoadFromDisk(const char* filePath);
 };
 
 class BasicShaderProgram
@@ -25,15 +27,10 @@ public:
 
 	BasicShaderProgram();
 	~BasicShaderProgram() = default;
-	void AttachShader(Shader& shader);
+	void AttachShader(ShaderSource& shader);
 	void CompileAndAttachShader(const char* sPath, unsigned int sType);
 	void UseProgram();
 
 	unsigned int shaderProgramObjId;
 private:
 };
-
-namespace shader
-{
-}
-

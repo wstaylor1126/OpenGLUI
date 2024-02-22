@@ -10,8 +10,7 @@ void SGFXEngine::glfwKeyCallback(GLFWwindow* window, int keyCode, int scanCode, 
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
 
-	
-	if (keyCode >= 48 && keyCode <=57 && action == GLFW_PRESS)
+	if (keyCode >= 48 && keyCode <= 57 && action == GLFW_PRESS)
 	{
 		sgfxengine::vertexId = keyCode - 48;
 	}
@@ -37,7 +36,7 @@ void SGFXEngine::glfwMouseButtonCallback(GLFWwindow* window, int buttonCode, int
 	{
 		sgfxengine::cursorIsHeld = 0;
 	}
-}
+} 
 void SGFXEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
@@ -58,7 +57,7 @@ void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 //--Public
 SGFXEngine::SGFXEngine()
 {
-
+	//--This probably needs a proper definition. Will most likely just be a wrapper for the Init() function
 }
 SGFXEngine::~SGFXEngine()
 {
@@ -66,6 +65,7 @@ SGFXEngine::~SGFXEngine()
 }
 int SGFXEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* monitor)
 {
+	//--Most of the basic initialization is done. Will almost certainly be expanded upon in the future
 	if (!glfwInit())
 	{
 		std::cout << "GLFW initialization failed." << std::endl;
@@ -74,19 +74,22 @@ int SGFXEngine::Init(int windowX, int windowY, const char* title, GLFWmonitor* m
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, _GL_MAJOR_VERSION_);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, _GL_MINOR_VERSION_);
+
+#if defined(_GL_USING_CORE_PROFILE_)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	
+#endif
 
 	window = glfwCreateWindow(windowX, windowY, title, monitor, nullptr);
 	glfwMakeContextCurrent(window);
 
-#ifdef _SHOW_GL_CONTEXT_INFO_
+#if defined(_SHOW_GL_CONTEXT_INFO_)
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 #endif
 
 	BindWindowToEngineContext();
 
+	//--This will probably be offloaded or won't be stored in the SGFXEngine class itself, not sure yet
 	_windowX_ = windowX;
 	_windowY_ = windowY;
 

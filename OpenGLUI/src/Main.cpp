@@ -7,24 +7,22 @@
 
 using namespace std;
 using namespace sgfxengine;
-using namespace shader;
-using namespace renderer;
 
 int main()
 {
 	
-	//Log GLLog("C:\\Users\\Falcon\\OneDrive\\Desktop\\GLLog.txt", "GLLog");
+	Log GLLog("C:\\Users\\Falcon\\OneDrive\\Desktop\\GLLog.txt", "GLLog");
 
 	SGFXEngine ui;
 
-	if (!ui.Init(1280, 720, "UIEngine"))
+	if (!ui.Init(1440, 810, "UIEngine"))
 	{
 		std::cout << "Error initializing UIEngine" << std::endl;
 		return 0;
 	};
 	
 
-	//GLLog.Write("UIEngine successfully initialized");
+	GLLog.Write("UIEngine successfully initialized");
 
 	BMPTextureData texture("C:\\Users\\Falcon\\OneDrive\\Desktop\\texture.bmp");
 	texture.Load();
@@ -58,13 +56,6 @@ int main()
 
 	while (!glfwWindowShouldClose(ui.window))
 	{
-		//if (sgfxengine::cursorIsHeld == 1)
-		//{
-		//	renderer::vertexPositions[sgfxengine::vertexId * 4 - 4] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
-		//	renderer::vertexPositions[sgfxengine::vertexId * 4 - 3] = -sgfxengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
-		//	renderer::vertexPositions[16] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
-		//	renderer::vertexPositions[17] = -sgfxengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
-		//}
 		if (sgfxengine::cursorIsHeld == 1)
 		{
 			renderer::vertexPositions[sgfxengine::vertexId * 4 - 4] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
@@ -77,6 +68,6 @@ int main()
 	}
 	glDeleteTextures(1, &textureId);
 	ui.~SGFXEngine();
-	//GLLog.Dump();
+	GLLog.Dump();
 	return 0;
 }

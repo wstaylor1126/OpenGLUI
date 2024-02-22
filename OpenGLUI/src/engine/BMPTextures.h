@@ -1,6 +1,7 @@
 #pragma once
 #include "SGFXEngine.h"
 
+//--Honestly this code is really hacky. I might clean it up later or overhaul it. For now it works as a placeholder
 
 class BMPTextureData
 {
@@ -16,4 +17,5 @@ public:
 private:
 	const char* filePath;
 	unsigned long long diskSize;
+	void BMPRedBlueChannelFlip();
 };

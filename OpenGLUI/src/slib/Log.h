@@ -2,12 +2,6 @@
 #pragma once
 #include "sLib.h"
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-
-
 class Log
 {
 public:

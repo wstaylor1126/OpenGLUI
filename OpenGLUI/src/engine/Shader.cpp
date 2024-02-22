@@ -14,34 +14,34 @@ void BasicShaderProgram::UseProgram()
 
 	glUseProgram(shaderProgramObjId);
 }
-void BasicShaderProgram::AttachShader(Shader& shader)
+void BasicShaderProgram::AttachShader(ShaderSource& shader)
 {
-	glAttachShader(shaderProgramObjId, shader.shaderId);
+	glAttachShader(shaderProgramObjId, shader.shaderObjId);
 }
 void BasicShaderProgram::CompileAndAttachShader(const char* sPath, unsigned int sType)
 {
-	Shader newShader(sPath, sType);
+	ShaderSource newShader(sPath, sType);
 	newShader.Init();
 	AttachShader(newShader);
 
-	newShader.~Shader();
+	newShader.~ShaderSource();
 }
 
 //--Public
 
-void Shader::Init()
+void ShaderSource::Init()
 {
-	LoadFromDisk(shaderStr, shaderPath);
-	shaderId = CompileShader(shaderStr);
+	LoadFromDisk(shaderFilePath);
+	shaderObjId = CompileShader(shaderStr);
 }
-Shader::Shader(const char* filePath, unsigned int type)
+ShaderSource::ShaderSource(const char* filePath, unsigned int type)
 {
-	shaderPath = filePath;
+	shaderFilePath = filePath;
 	shaderType = type;
 }
 //--Private
 
-unsigned int Shader::CompileShader(std::string& shaderSource)
+unsigned int ShaderSource::CompileShader(const std::string& shaderSource)
 {
 	unsigned int shaderId = glCreateShader(shaderType);
 	const char* sourceCStr = shaderSource.c_str();
@@ -52,8 +52,6 @@ unsigned int Shader::CompileShader(std::string& shaderSource)
 	glGetShaderiv(shaderId, GL_COMPILE_STATUS, &no_err);
 	if (!no_err)
 	{
-		std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-
 		int strLen;
 		glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &strLen);
 		char* msg = new char[strLen];
@@ -68,7 +66,7 @@ unsigned int Shader::CompileShader(std::string& shaderSource)
 
 	return shaderId;
 }
-void Shader::LoadFromDisk(std::string& shaderStr, const char* filePath)
+void ShaderSource::LoadFromDisk(const char* filePath)
 {
 	int sizeOnDisk;
 	char shaderBytes[_MAX_BASIC_SHADER_SIZE_];
@@ -80,8 +78,7 @@ void Shader::LoadFromDisk(std::string& shaderStr, const char* filePath)
 
 	if (sizeOnDisk > _MAX_BASIC_SHADER_SIZE_)
 	{
-#ifdef _BASIC_SHADER_DEBUG_
-
+#if defined(_BASIC_SHADER_DEBUG_)
 		std::cout << "Basic shader size on disk exceeds the size of " << _MAX_BASIC_SHADER_SIZE_ << std::endl;
 #endif
 		return;
@@ -94,7 +91,7 @@ void Shader::LoadFromDisk(std::string& shaderStr, const char* filePath)
 	shaderStr = std::string(shaderBytes, sizeOnDisk);
 	return;
 }
-Shader::~Shader()
+ShaderSource::~ShaderSource()
 {
-	glDeleteShader(shaderId);
+	glDeleteShader(shaderObjId);
 }

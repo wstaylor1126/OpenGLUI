@@ -2,7 +2,7 @@
 
 void Draw(GLFWwindow* window)
 {
-	float scalar = (sin(glfwGetTime())) + 2.0f;
+	float scalar = (sin(glfwGetTime())) + 1.5f;
 
 	renderer::vertexPositions[3] = scalar;
 	renderer::vertexPositions[7] = scalar;
