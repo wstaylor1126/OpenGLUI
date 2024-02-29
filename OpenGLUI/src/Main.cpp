@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+
 #include "sLib.h"
 #include "SGFXEngine.h"
 
@@ -11,7 +12,7 @@ using namespace sgfxengine;
 int main()
 {
 	
-	Log GLLog("C:\\Users\\Falcon\\OneDrive\\Desktop\\GLLog.txt", "GLLog");
+	Log GLLog("C:\\Users\\Falcon\\OneDrive\\Desktop\\GLLog.bin", "GLLog");
 
 	SGFXEngine ui;
 
@@ -20,7 +21,6 @@ int main()
 		std::cout << "Error initializing UIEngine" << std::endl;
 		return 0;
 	};
-	
 
 	GLLog.Write("UIEngine successfully initialized");
 
@@ -38,7 +38,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, texture.imageWidth, texture.imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.pixelData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, texture.imageWidth, texture.imageHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE, texture.pixelData);
 
 	BasicShaderProgram shaderProgram;
 	shaderProgram.CompileAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseVertex.vert", GL_VERTEX_SHADER);
@@ -66,6 +66,7 @@ int main()
 
 		glfwPollEvents();
 	}
+	
 	glDeleteTextures(1, &textureId);
 	ui.~SGFXEngine();
 	GLLog.Dump();

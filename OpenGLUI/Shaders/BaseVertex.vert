@@ -8,8 +8,7 @@ out vec2 textureCoords;
 
 void main()
 {
-    vec4 newPosition = vec4(pos.xyzw);
-    gl_Position = newPosition;
+    gl_Position = pos.xyzw;
 
     textureCoords = textureCoordsIn;
 }

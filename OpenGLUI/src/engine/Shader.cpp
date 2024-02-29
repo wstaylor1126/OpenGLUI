@@ -21,7 +21,7 @@ void BasicShaderProgram::AttachShader(ShaderSource& shader)
 void BasicShaderProgram::CompileAndAttachShader(const char* sPath, unsigned int sType)
 {
 	ShaderSource newShader(sPath, sType);
-	newShader.Init();
+	newShader.LoadAndCompile();
 	AttachShader(newShader);
 
 	newShader.~ShaderSource();
@@ -29,16 +29,15 @@ void BasicShaderProgram::CompileAndAttachShader(const char* sPath, unsigned int 
 
 //--Public
 
-void ShaderSource::Init()
+void ShaderSource::LoadAndCompile()
 {
 	LoadFromDisk(shaderFilePath);
 	shaderObjId = CompileShader(shaderStr);
 }
 ShaderSource::ShaderSource(const char* filePath, unsigned int type)
-{
-	shaderFilePath = filePath;
-	shaderType = type;
-}
+	: shaderFilePath(filePath), shaderType(type)
+{}
+
 //--Private
 
 unsigned int ShaderSource::CompileShader(const std::string& shaderSource)

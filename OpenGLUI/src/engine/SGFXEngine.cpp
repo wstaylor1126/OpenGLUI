@@ -44,21 +44,18 @@ void SGFXEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int 
 	engine->_windowY_ = height;
 	glViewport(0, 0, width, height);
 
-	Draw(engine->window);
+	Draw(window);
 }
 void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
-
-	Draw(engine->window);
+	std::cout << "Window is being repositioned" << "\n";
+	Draw(window);
 }
 
 
 //--Public
-SGFXEngine::SGFXEngine()
-{
-	//--This probably needs a proper definition. Will most likely just be a wrapper for the Init() function
-}
+SGFXEngine::SGFXEngine() = default;
 SGFXEngine::~SGFXEngine()
 {
 	glfwTerminate();

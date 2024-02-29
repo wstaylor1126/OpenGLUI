@@ -20,6 +20,8 @@
     <ClCompile Include="src\engine\VertexArray.cpp">
       <Filter>engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\slib\Mem.cpp" />
+    <ClCompile Include="src\engine\SGFXError.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="slib">
@@ -51,5 +53,11 @@
     <ClInclude Include="src\engine\VertexArray.h">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\slib\Mem.h" />
+    <ClInclude Include="src\engine\SGFXError.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\BaseFrag.frag" />
+    <None Include="Shaders\BaseVertex.vert" />
   </ItemGroup>
 </Project>

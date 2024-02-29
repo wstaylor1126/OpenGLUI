@@ -1,4 +1,5 @@
-#pragma once
+#if !defined(_SGFX_SHADER_H_)
+#define _SGFX_SHADER_H_
 
 #include "SGFXEngine.h"
 
@@ -11,7 +12,7 @@ public:
 
 	ShaderSource(const char* filePath, unsigned int type);
 	~ShaderSource();
-	void Init();
+	void LoadAndCompile();
 	unsigned int shaderObjId, shaderType;
 private:
 	const char* shaderFilePath;
@@ -34,3 +35,5 @@ public:
 	unsigned int shaderProgramObjId;
 private:
 };
+
+#endif

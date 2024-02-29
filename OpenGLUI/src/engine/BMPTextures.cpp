@@ -7,6 +7,8 @@ BMPTextureData::BMPTextureData(const char* path)
 }
 BMPTextureData::~BMPTextureData()
 {
+	/*This might have to change, for now its just to prevent memory leaks by basically making it a unique_ptr, but a propper resource manager will
+	probably require that this is not in place*/
 	delete[] pixelData;
 }
 void BMPTextureData::Load()
@@ -46,7 +48,7 @@ void BMPTextureData::Load()
 	}
 	
 	bmpStream.close();
-	BMPRedBlueChannelFlip();
+	//BMPRedBlueChannelFlip();
 }
 //--Private
 void BMPTextureData::BMPRedBlueChannelFlip() //--This is absolutely evil

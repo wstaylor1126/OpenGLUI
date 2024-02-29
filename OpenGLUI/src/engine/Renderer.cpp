@@ -5,9 +5,17 @@ void Draw(GLFWwindow* window)
 	float scalar = (sin(glfwGetTime())) + 1.5f;
 
 	renderer::vertexPositions[3] = scalar;
-	renderer::vertexPositions[7] = scalar;
-	renderer::vertexPositions[11] = scalar;
-	renderer::vertexPositions[15] = scalar;
+	renderer::vertexPositions[11] = -scalar + 2.0f;
+	//for (int i = 3; i <= 15; i+=4)
+	//{
+	//	if (i == sgfxengine::vertexId)
+	//	{
+	//		continue;
+	//	}
+	//	renderer::vertexPositions[i] = scalar;
+	//}
+
+
 
 	//std::cout << 0.25f/scalar << std::endl;
 
@@ -54,7 +62,7 @@ void Draw(GLFWwindow* window)
 	glBindBuffer(GL_ARRAY_BUFFER, textureCoordinateId);
 	glBufferData(GL_ARRAY_BUFFER, vertexAttribCount  * 2 * sizeof(float), renderer::textureCoords, GL_STATIC_DRAW);
 
-
+	
 	glUniform1i(textureLocation, 0);
 
 	glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, nullptr);

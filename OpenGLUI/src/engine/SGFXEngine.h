@@ -1,21 +1,24 @@
-#pragma once
-//#define _SUI_NO_DEBUG_
+#if !defined(_SGFX_ENGINE_H_)
+#define _SGFX_ENGINE_H_
 
 //--Relevant SGFXEngine settings and macros
-#if !defined( _SUI_NO_DEBUG_)
+
+#if !defined(_SUI_NO_DEBUG_)
 #define _SHOW_GL_CONTEXT_INFO_
 #define _BASIC_SHADER_DEBUG_
 #endif
 
 #define _MAX_BASIC_SHADER_SIZE_ 8192
 
-//--OpenGl related macros
+
+//--OpenGl related macros/settings
 
 #define GLEW_STATIC
 #define _GL_MAJOR_VERSION_ 3
 #define _GL_MINOR_VERSION_ 3
 
 #define _GL_USING_CORE_PROFILE_
+
 
 //--Winapi
 #include <windows.h>
@@ -38,6 +41,8 @@
 #include "Renderer.h"
 #include "BMPTextures.h"
 #include "VertexArray.h"
+#include "SGFXError.h"
+
 
 
 namespace sgfxengine
@@ -81,3 +86,6 @@ private:
 
 	void BindWindowToEngineContext();
 };
+
+
+#endif

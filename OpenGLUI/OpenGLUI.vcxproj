@@ -23,18 +23,26 @@
     <ClCompile Include="src\engine\Shader.cpp" />
     <ClCompile Include="src\engine\Renderer.cpp" />
     <ClCompile Include="src\engine\SGFXEngine.cpp" />
+    <ClCompile Include="src\engine\SGFXError.cpp" />
     <ClCompile Include="src\engine\VertexArray.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\slib\Log.cpp" />
+    <ClCompile Include="src\slib\Mem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\BMPTextures.h" />
+    <ClInclude Include="src\engine\SGFXError.h" />
     <ClInclude Include="src\engine\Renderer.h" />
     <ClInclude Include="src\engine\Shader.h" />
     <ClInclude Include="src\engine\SGFXEngine.h" />
     <ClInclude Include="src\engine\VertexArray.h" />
     <ClInclude Include="src\slib\Log.h" />
+    <ClInclude Include="src\slib\Mem.h" />
     <ClInclude Include="src\slib\sLib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\BaseFrag.frag" />
+    <None Include="Shaders\BaseVertex.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

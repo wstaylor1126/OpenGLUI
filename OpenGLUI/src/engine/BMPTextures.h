@@ -1,4 +1,6 @@
-#pragma once
+#if !defined(_SGFX_BMP_TEXTURES_H_)
+#define _SGFX_BMP_TEXTURES_H_
+
 #include "SGFXEngine.h"
 
 //--Honestly this code is really hacky. I might clean it up later or overhaul it. For now it works as a placeholder
@@ -19,3 +21,5 @@ private:
 	unsigned long long diskSize;
 	void BMPRedBlueChannelFlip();
 };
+
+#endif
