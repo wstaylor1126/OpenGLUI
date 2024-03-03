@@ -5,23 +5,25 @@
     <ClCompile Include="src\slib\Log.cpp">
       <Filter>slib</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\Shader.cpp">
+    <ClCompile Include="src\engine\Renderer\Shader.cpp">
       <Filter>engine</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\SGFXEngine.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\Renderer.cpp">
+    <ClCompile Include="src\engine\Renderer\Renderer.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\BMPTextures.cpp">
+    <ClCompile Include="src\engine\Renderer\Texture\BMPLoad.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\VertexArray.cpp">
+    <ClCompile Include="src\engine\Renderer\Vertex\VertexArray.cpp">
       <Filter>engine</Filter>
     </ClCompile>
     <ClCompile Include="src\slib\Mem.cpp" />
-    <ClCompile Include="src\engine\SGFXError.cpp" />
+    <ClCompile Include="src\engine\Error\SGFXError.cpp" />
+    <ClCompile Include="src\engine\Renderer\Vertex\IndexBuffer.cpp" />
+    <ClCompile Include="src\engine\Renderer\Vertex\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="slib">
@@ -41,20 +43,22 @@
     <ClInclude Include="src\engine\SGFXEngine.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Shader.h">
+    <ClInclude Include="src\engine\Renderer\Shader.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Renderer.h">
+    <ClInclude Include="src\engine\Renderer\Renderer.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\BMPTextures.h">
+    <ClInclude Include="src\engine\Renderer\Texture\BMPLoad.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\VertexArray.h">
+    <ClInclude Include="src\engine\Renderer\Vertex\VertexArray.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\slib\Mem.h" />
-    <ClInclude Include="src\engine\SGFXError.h" />
+    <ClInclude Include="src\engine\Error\SGFXError.h" />
+    <ClInclude Include="src\engine\Renderer\Vertex\IndexBuffer.h" />
+    <ClInclude Include="src\engine\Renderer\Vertex\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BaseFrag.frag" />

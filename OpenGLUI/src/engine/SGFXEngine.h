@@ -34,14 +34,17 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "sLib.h"
 
 //--All SGFXEngine headers
-#include "sLib.h"
-#include "Shader.h"
-#include "Renderer.h"
-#include "BMPTextures.h"
-#include "VertexArray.h"
-#include "SGFXError.h"
+#include "Error/SGFXError.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Renderer.h"
+#include "Renderer/Vertex/VertexArray.h"
+#include "Renderer/Vertex/IndexBuffer.h"
+#include "Renderer/Vertex/VertexBuffer.h"
+#include "Renderer/Texture/BMPLoad.h"
+
 
 
 

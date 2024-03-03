@@ -8,11 +8,11 @@ VertexArray::~VertexArray()
 {
 	glDeleteVertexArrays(1, &vertexArrayId);
 };
-void VertexArray::Bind()
+void VertexArray::Bind() const
 {
 	glBindVertexArray(vertexArrayId);
 }
-void VertexArray::Unbind()
+void VertexArray::Unbind() const
 {
 	glBindVertexArray(0);
 }

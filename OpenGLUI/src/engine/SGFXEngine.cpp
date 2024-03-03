@@ -49,7 +49,6 @@ void SGFXEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int 
 void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
-	std::cout << "Window is being repositioned" << "\n";
 	Draw(window);
 }
 

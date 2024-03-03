@@ -53,22 +53,42 @@ int main()
 	VertexArray mainVertexArray;
 	mainVertexArray.Bind();
 
+	VertexAttribBufLayout vertLayout;
+
+	IndexBuf indicies(renderer::indexBuffer, vertexCount);
+	VertexBuf vertexPosAttrib(renderer::vertexPositions, vertexAttribCount * 4 * sizeof(float));
+	VertexBuf vertexTextCoordAttrib(renderer::textureCoords, vertexAttribCount * 2 * sizeof(float));
+	vertLayout.PushNewAttribute(vertexPosAttrib, GL_FLOAT, 4, sizeof(float));
+	vertLayout.PushNewAttribute(vertexTextCoordAttrib, GL_FLOAT, 2, sizeof(float));
 
 	while (!glfwWindowShouldClose(ui.window))
 	{
+		float scalar = (sin(glfwGetTime())) + 1.5f;
+
+		renderer::vertexPositions[3] = scalar;
+		renderer::vertexPositions[11] = -scalar + 2.0f;
+		renderer::textureCoords[0] = -scalar;
+		renderer::textureCoords[1] = scalar;
 		if (sgfxengine::cursorIsHeld == 1)
 		{
 			renderer::vertexPositions[sgfxengine::vertexId * 4 - 4] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
 			renderer::vertexPositions[sgfxengine::vertexId * 4 - 3] = -sgfxengine::PixelToVertex(ui._cursorPosY_, ui._windowY_);
 		}
 
+		vertexPosAttrib.ReloadVertexData(renderer::vertexPositions, vertexAttribCount * 4 * sizeof(float));
+		vertexTextCoordAttrib.ReloadVertexData(renderer::textureCoords, vertexAttribCount * 2 * sizeof(float));
+
+
 		Draw(ui.window);
 
+		glfwSwapBuffers(ui.window);
+
 		glfwPollEvents();
+	//	vertLayout.ClearAttributes();
 	}
 	
 	glDeleteTextures(1, &textureId);
 	ui.~SGFXEngine();
 	GLLog.Dump();
-	return 0;
+	return 1;
 }

@@ -3,7 +3,7 @@
 #include "SGFXEngine.h"
 
 constexpr unsigned int vertexCount = 6;
-constexpr unsigned int vertexAttribCount = 5;
+constexpr unsigned int vertexAttribCount = 4;
 inline unsigned int textureLocation;
 
 //--This whole file right now is temporary bullshit. So is it's .cpp definition file

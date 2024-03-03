@@ -1,4 +1,4 @@
-#include "BMPTextures.h"
+#include "BMPLoad.h"
 
 //--Public
 BMPTextureData::BMPTextureData(const char* path)
