@@ -1,6 +1,11 @@
-#pragma once
+#if !defined(_SGFX_RENDERER_H_)
+#define _SGFX_RENDERER_H_
 
 #include "SGFXEngine.h"
+#include "Renderer/Shader.h"
+#include "Vertex/VertexArray.h"
+#include "Vertex/IndexBuffer.h"
+#include "Vertex/VertexBuffer.h"
 
 constexpr unsigned int vertexCount = 6;
 constexpr unsigned int vertexAttribCount = 4;
@@ -32,5 +37,6 @@ namespace renderer
 	};
 }
 
-void Draw(GLFWwindow* window);
+void sgfxDraw(const ShaderProgram& shader, const VertexArray& vertexArray, const IndexBuf& indexBuffer, const VertexAttribBufLayout& vertexAttributes);
 
+#endif

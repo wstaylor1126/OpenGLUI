@@ -24,6 +24,7 @@
     <ClCompile Include="src\engine\Error\SGFXError.cpp" />
     <ClCompile Include="src\engine\Renderer\Vertex\IndexBuffer.cpp" />
     <ClCompile Include="src\engine\Renderer\Vertex\VertexBuffer.cpp" />
+    <ClCompile Include="src\engine\Types\Types.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="slib">
@@ -59,6 +60,7 @@
     <ClInclude Include="src\engine\Error\SGFXError.h" />
     <ClInclude Include="src\engine\Renderer\Vertex\IndexBuffer.h" />
     <ClInclude Include="src\engine\Renderer\Vertex\VertexBuffer.h" />
+    <ClInclude Include="src\engine\Types\Types.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BaseFrag.frag" />

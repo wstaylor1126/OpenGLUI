@@ -1,7 +1,7 @@
+#include "SGFXEngine.h"
+
 #if !defined(_SGFX_SHADER_H_)
 #define _SGFX_SHADER_H_
-
-#include "SGFXEngine.h"
 
 //--This shader loader is going to be expanded upon and improved. It's a little rushed and needs to be cleaned up
 //--It's a good foundation though
@@ -22,15 +22,16 @@ private:
 	void LoadFromDisk(const char* filePath);
 };
 
-class BasicShaderProgram
+class ShaderProgram
 {
 public:
 
-	BasicShaderProgram();
-	~BasicShaderProgram() = default;
-	void AttachShader(ShaderSource& shader);
+	ShaderProgram();
+	~ShaderProgram() = default;
+	void AttachShader(const ShaderSource& shader) const;
 	void CompileAndAttachShader(const char* sPath, unsigned int sType);
-	void UseProgram();
+	void UseProgram() const;
+	void UnloadProgram() const;
 
 	unsigned int shaderProgramObjId;
 private:

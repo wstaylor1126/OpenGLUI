@@ -2,17 +2,17 @@
 
 VertexArray::VertexArray()
 {
-	glGenVertexArrays(1, &vertexArrayId);
+	GLCallErr(glGenVertexArrays(1, &vertexArrayId));
 }
 VertexArray::~VertexArray()
 {
-	glDeleteVertexArrays(1, &vertexArrayId);
+	GLCallErr(glDeleteVertexArrays(1, &vertexArrayId));
 };
 void VertexArray::Bind() const
 {
-	glBindVertexArray(vertexArrayId);
+	GLCallErr(glBindVertexArray(vertexArrayId));
 }
 void VertexArray::Unbind() const
 {
-	glBindVertexArray(0);
+	GLCallErr(glBindVertexArray(0));
 }

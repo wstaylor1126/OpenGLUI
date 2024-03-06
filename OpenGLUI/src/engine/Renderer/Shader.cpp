@@ -2,23 +2,27 @@
 
 //--Public
 
-BasicShaderProgram::BasicShaderProgram()
+ShaderProgram::ShaderProgram()
 {
 	shaderProgramObjId = glCreateProgram();
 }
-void BasicShaderProgram::UseProgram()
+void ShaderProgram::UseProgram() const
 {
+	glUseProgram(shaderProgramObjId);
+}
+void ShaderProgram::UnloadProgram() const
+{
+	glUseProgram(0);
+}
+void ShaderProgram::AttachShader(const ShaderSource& shader) const
+{
+	glAttachShader(shaderProgramObjId, shader.shaderObjId);
+
 	glLinkProgram(shaderProgramObjId);
 	glValidateProgram(shaderProgramObjId);
 	//--Probably some error handling to do. I mean there's a lot to do everywhere but it'll be later
-
-	glUseProgram(shaderProgramObjId);
 }
-void BasicShaderProgram::AttachShader(ShaderSource& shader)
-{
-	glAttachShader(shaderProgramObjId, shader.shaderObjId);
-}
-void BasicShaderProgram::CompileAndAttachShader(const char* sPath, unsigned int sType)
+void ShaderProgram::CompileAndAttachShader(const char* sPath, unsigned int sType)
 {
 	ShaderSource newShader(sPath, sType);
 	newShader.LoadAndCompile();

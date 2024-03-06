@@ -32,7 +32,6 @@ void VertexBuf::DeleteGLBuf()
 	VertexBuf::~VertexBuf();
 }
 
-
 //--VertexAttribBufLayout
 
 VertexAttribBufLayout::VertexAttribBufLayout() = default;
@@ -46,16 +45,16 @@ void VertexAttribBufLayout::PushNewAttribute(VertexBuf vBuf, unsigned int glType
 
 	int index = layout.size() - 1;
 
-	GLCallErrDEBUG(glEnableVertexAttribArray(index), 36);
+	GLCallErr(glEnableVertexAttribArray(index));
 	vBuf.Bind();
-	GLCallErrDEBUG(glVertexAttribPointer(index, attribLength, glType, GL_FALSE, attribElementSize * attribLength, (const void*)offset), 38);
+	GLCallErr(glVertexAttribPointer(index, attribLength, glType, GL_FALSE, attribElementSize * attribLength, (const void*)offset));
 	vBuf.Unbind();
 }
 void VertexAttribBufLayout::ClearAttributes()
 {
 	for (int i = 0; i < layout.size(); i++)
 	{
-		GLCallErrDEBUG(glDisableVertexAttribArray(i), 45);
+		GLCallErr(glDisableVertexAttribArray(i));
 	}
 	layout.clear();
 }

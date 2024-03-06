@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 #include "sLib.h"
 #include "SGFXEngine.h"
 
@@ -40,7 +39,7 @@ int main()
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, texture.imageWidth, texture.imageHeight, 0, GL_BGRA, GL_UNSIGNED_BYTE, texture.pixelData);
 
-	BasicShaderProgram shaderProgram;
+	ShaderProgram shaderProgram;
 	shaderProgram.CompileAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseVertex.vert", GL_VERTEX_SHADER);
 	shaderProgram.CompileAndAttachShader("C:\\Users\\Falcon\\source\\repos\\OpenGLUI\\OpenGLUI\\Shaders\\BaseFrag.frag", GL_FRAGMENT_SHADER);
 	shaderProgram.UseProgram();
@@ -51,24 +50,22 @@ int main()
 	glfwSwapInterval(0);
 
 	VertexArray mainVertexArray;
-	mainVertexArray.Bind();
-
 	VertexAttribBufLayout vertLayout;
 
 	IndexBuf indicies(renderer::indexBuffer, vertexCount);
 	VertexBuf vertexPosAttrib(renderer::vertexPositions, vertexAttribCount * 4 * sizeof(float));
 	VertexBuf vertexTextCoordAttrib(renderer::textureCoords, vertexAttribCount * 2 * sizeof(float));
+
+
 	vertLayout.PushNewAttribute(vertexPosAttrib, GL_FLOAT, 4, sizeof(float));
 	vertLayout.PushNewAttribute(vertexTextCoordAttrib, GL_FLOAT, 2, sizeof(float));
 
 	while (!glfwWindowShouldClose(ui.window))
 	{
-		float scalar = (sin(glfwGetTime())) + 1.5f;
+		float scalar = (sinf(glfwGetTime())) + 1.5f;
 
 		renderer::vertexPositions[3] = scalar;
 		renderer::vertexPositions[11] = -scalar + 2.0f;
-		renderer::textureCoords[0] = -scalar;
-		renderer::textureCoords[1] = scalar;
 		if (sgfxengine::cursorIsHeld == 1)
 		{
 			renderer::vertexPositions[sgfxengine::vertexId * 4 - 4] = sgfxengine::PixelToVertex(ui._cursorPosX_, ui._windowX_);
@@ -78,17 +75,19 @@ int main()
 		vertexPosAttrib.ReloadVertexData(renderer::vertexPositions, vertexAttribCount * 4 * sizeof(float));
 		vertexTextCoordAttrib.ReloadVertexData(renderer::textureCoords, vertexAttribCount * 2 * sizeof(float));
 
+		GLCallErr(glUniform1i(textureLocation, 0));
 
-		Draw(ui.window);
+		sgfxDraw(shaderProgram, mainVertexArray, indicies, vertLayout);
 
 		glfwSwapBuffers(ui.window);
 
 		glfwPollEvents();
-	//	vertLayout.ClearAttributes();
+		//vertLayout.ClearAttributes();
 	}
 	
 	glDeleteTextures(1, &textureId);
 	ui.~SGFXEngine();
+
 	GLLog.Dump();
 	return 1;
 }

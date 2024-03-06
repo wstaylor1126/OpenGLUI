@@ -44,12 +44,12 @@ void SGFXEngine::glfwFrameBufferSizeCallback(GLFWwindow* window, int width, int 
 	engine->_windowY_ = height;
 	glViewport(0, 0, width, height);
 
-	Draw(window);
+	//sgfxDraw();
 }
 void SGFXEngine::glfwWindowPosCallback(GLFWwindow* window, int xpos, int ypos)
 {
 	SGFXEngine* engine = (SGFXEngine*)glfwGetWindowUserPointer(window);
-	Draw(window);
+//	sgfxDraw();
 }
 
 

@@ -38,6 +38,7 @@
 
 //--All SGFXEngine headers
 #include "Error/SGFXError.h"
+#include "Types/Types.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Vertex/VertexArray.h"

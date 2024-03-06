@@ -27,6 +27,7 @@
     <ClCompile Include="src\engine\Error\SGFXError.cpp" />
     <ClCompile Include="src\engine\Renderer\Vertex\IndexBuffer.cpp" />
     <ClCompile Include="src\engine\Renderer\Vertex\VertexArray.cpp" />
+    <ClCompile Include="src\engine\Types\Types.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\slib\Log.cpp" />
     <ClCompile Include="src\slib\Mem.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="src\engine\SGFXEngine.h" />
     <ClInclude Include="src\engine\Renderer\Vertex\IndexBuffer.h" />
     <ClInclude Include="src\engine\Renderer\Vertex\VertexArray.h" />
+    <ClInclude Include="src\engine\Types\Types.h" />
     <ClInclude Include="src\slib\Log.h" />
     <ClInclude Include="src\slib\Mem.h" />
     <ClInclude Include="src\slib\sLib.h" />

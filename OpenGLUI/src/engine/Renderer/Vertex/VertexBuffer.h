@@ -19,6 +19,7 @@ private:
 	void* vData;
 };
 
+
 class VertexAttribBufLayout
 {
 public:
